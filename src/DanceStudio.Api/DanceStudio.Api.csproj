@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DanceStudio.Application\DanceStudio.Application.csproj" />
     <ProjectReference Include="..\DanceStudio.Contracts\DanceStudio.Contracts.csproj" />
+    <ProjectReference Include="..\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
