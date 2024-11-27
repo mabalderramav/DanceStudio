@@ -11,8 +11,7 @@ namespace DanceStudio.Application.Subscriptions.Commands.CreateSubscription
         private readonly ISubscriptionsRepository subscriptionsRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public CreateSubscriptionCommandHandler(ISubscriptionsRepository subscriptionsRepository,
-            IUnitOfWork unitOfWork)
+        public CreateSubscriptionCommandHandler(ISubscriptionsRepository subscriptionsRepository, IUnitOfWork unitOfWork)
         {
             this.subscriptionsRepository = subscriptionsRepository;
             this.unitOfWork = unitOfWork;
