@@ -15,12 +15,12 @@ namespace DanceStudio.Infrastructure.Subcriptions.Persistence
 
         public async Task AddSubscriptionAsync(Subscription subscription)
         {
-            await context.Subscriptions.AddAsync(subscription);
+            await context.Set<Subscription>().AddAsync(subscription);
         }
 
         public async Task<Subscription?> GetByIdAsync(Guid subcriptionId)
         {
-            return await context.Subscriptions.FindAsync(subcriptionId);
+            return await context.Set<Subscription>().FindAsync(subcriptionId);
         }
     }
 }

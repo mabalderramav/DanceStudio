@@ -7,7 +7,21 @@ dotnet build
 dotnet run --project src/MyProject/MyProject.csproj
 
 # Add package
-dotnet add src/DanceStudio.Api/DanceStudio.Api.csproj package Microsoft.EntityFrameworkCore.Design   
+### Package ErrorOr to project DanceStudio.Domain
+### This package is used to return error or value
+dotnet add .\src\DanceStudio.Domain\DanceStudio.Domain.csproj package ErrorOr
+
+### Package Microsoft.EntityFrameworkCore to project DanceStudio.Infrastructure
+### This package is used to create a database context
+dotnet add src/DanceStudio.Api/DanceStudio.Api.csproj package Microsoft.EntityFrameworkCore.Design
+
+### Package Ardalis.SmartEnum to project DanceStudio.Domain
+### This package is used to create a smart enum
+dotnet add .\src\DanceStudio.Domain\DanceStudio.Domain.csproj package Ardalis.SmartEnum
+
+### Package Throw to project DanceStudio.Domain
+### This package is used to throw exception
+dotnet add .\src\DanceStudio.Domain\DanceStudio.Domain.csproj package Throw
 
 # Install the dotnet-ef tool globally: Run the following command to install the dotnet-ef tool globally:
 dotnet tool install --global dotnet-ef

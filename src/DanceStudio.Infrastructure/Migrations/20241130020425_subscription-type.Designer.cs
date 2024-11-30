@@ -4,6 +4,7 @@ using DanceStudio.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DanceStudio.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241130020425_subscription-type")]
+    partial class subscriptiontype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,20 +30,12 @@ namespace DanceStudio.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AdminId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("MaxStudioCount")
-                        .HasColumnType("int")
-                        .HasColumnName("MaxStudioCount");
-
-                    b.Property<string>("StudioIds")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("StudioIds");
-
                     b.Property<int>("SubscriptionType")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("adminId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("AdminId");
 
                     b.HasKey("Id");
 

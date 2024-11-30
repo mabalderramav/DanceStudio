@@ -20,10 +20,7 @@ namespace DanceStudio.Application.Subscriptions.Commands.CreateSubscription
             CancellationToken cancellationToken)
         {
             //Create a subscription
-            var subscription = new Subscription
-            {
-                Id = Guid.NewGuid()
-            };
+            var subscription = new Subscription(request.SubscriptionType, request.AdminId);
 
             //Add it to the persistence tech, or DB
             await subscriptionsRepository.AddSubscriptionAsync(subscription);
