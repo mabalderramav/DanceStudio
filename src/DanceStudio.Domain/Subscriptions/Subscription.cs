@@ -10,12 +10,11 @@ namespace DanceStudio.Domain.Subscriptions
         public SubscriptionType SubscriptionType { get; private set; } = default!;
         public Guid AdminId { get; }
         private readonly List<Guid> StudioIds = new();
-        private readonly int MaxStudioCount;
-
-
+        private readonly int MaxStudios;
 
         private Subscription()
         {
+
         }
 
         public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null)
@@ -23,23 +22,23 @@ namespace DanceStudio.Domain.Subscriptions
             SubscriptionType = subscriptionType;
             AdminId = adminId;
             Id = id ?? Guid.NewGuid();
+            MaxStudios = GetMaxStudios();
         }
 
-        #region bussiness logic
+        #region businessLogic
         public ErrorOr<Success> AddStudio(Studio studio)
         {
             StudioIds.Throw().IfContains(studio.Id);
 
-            if (StudioIds.Count >= MaxStudioCount)
+            if (StudioIds.Count >= MaxStudios)
             {
                 return SubscriptionErrors.CannotHaveMoreStudiosThanTheSubscriptionAllows;
             }
-
             StudioIds.Add(studio.Id);
-            return new Success();
+            return Result.Success;
         }
 
-        public int GetMaxStudio() => SubscriptionType.Name switch
+        public int GetMaxStudios() => SubscriptionType.Name switch
         {
             nameof(SubscriptionType.Free) => 1,
             nameof(SubscriptionType.Starter) => 2,
@@ -55,13 +54,18 @@ namespace DanceStudio.Domain.Subscriptions
             _ => throw new InvalidOperationException()
         };
 
-        public bool HasStudio(Guid studioId) => StudioIds.Contains(studioId);
+        public bool HasStudio(Guid studioId)
+        {
+            return StudioIds.Contains(studioId);
+        }
 
         public void RemoveStudio(Guid studioId)
         {
             StudioIds.Throw().IfNotContains(studioId);
             StudioIds.Remove(studioId);
         }
+
         #endregion
+
     }
 }

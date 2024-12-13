@@ -1,5 +1,7 @@
 ﻿using DanceStudio.Application.Common.Interfaces;
+using DanceStudio.Infrastructure.Admins.Persistence;
 using DanceStudio.Infrastructure.Common.Persistence;
+using DanceStudio.Infrastructure.Studios.Persistence;
 using DanceStudio.Infrastructure.Subcriptions.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +20,8 @@ namespace DanceStudio.Infrastructure
                 options.UseSqlServer(connectionString);
             });
             services.AddScoped<ISubscriptionsRepository, SubcriptionsRepository>();
+            services.AddScoped<IAdminsRepository, AdminsRepository>();
+            services.AddScoped<IStudiosRepository, StudiosRepository>();
             services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
             return services;
         }

@@ -3,9 +3,9 @@ using DanceStudio.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DanceStudio.Infrastructure.Subcriptions.Persistence
+namespace DanceStudio.Infrastructure.Subscriptions.Persistence
 {
-    public class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
+    public class SubscriptionsConfiguration : IEntityTypeConfiguration<Subscription>
     {
         public void Configure(EntityTypeBuilder<Subscription> builder)
         {
@@ -13,11 +13,12 @@ namespace DanceStudio.Infrastructure.Subcriptions.Persistence
             builder.Property(x => x.Id).ValueGeneratedNever();
             builder.Property(x => x.AdminId);
             builder.Property(x => x.SubscriptionType).HasConversion(
-                    subscriptionType => subscriptionType.Value,
-                    value => SubscriptionType.FromValue(value)
+                subscriptionType => subscriptionType.Value,
+                value => SubscriptionType.FromValue(value)
                 );
             builder.Property<List<Guid>>("StudioIds").HasColumnName("StudioIds").HasListOfIdsConverter();
-            builder.Property("MaxStudioCount").HasColumnName("MaxStudioCount");
+            builder.Property("MaxStudios").HasColumnName("MaxStudios");
+
         }
     }
 }

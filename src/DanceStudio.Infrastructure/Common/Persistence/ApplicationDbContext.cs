@@ -1,4 +1,6 @@
 ﻿using DanceStudio.Application.Common.Interfaces;
+using DanceStudio.Domain.Admins;
+using DanceStudio.Domain.Studios;
 using DanceStudio.Domain.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -10,6 +12,10 @@ namespace DanceStudio.Infrastructure.Common.Persistence
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Studio> Studios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
