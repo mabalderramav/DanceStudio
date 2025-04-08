@@ -55,6 +55,10 @@ namespace DanceStudio.Infrastructure.Migrations
                     b.Property<Guid>("SubscriptionId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("maxRooms")
+                        .HasColumnType("int")
+                        .HasColumnName("MaxRooms");
+
                     b.Property<string>("roomIds")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("RoomIds");

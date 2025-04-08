@@ -6,7 +6,7 @@ namespace DanceStudio.Domain.Studios
 {
     public class Studio
     {
-        private readonly int _maxRooms;
+        private readonly int maxRooms;
 
         public Guid Id { get; }
         private readonly List<Guid> _roomIds = new();
@@ -18,7 +18,7 @@ namespace DanceStudio.Domain.Studios
         public Studio(string name, int maxRooms, Guid subscriptionId, Guid? id = null)
         {
             Name = name;
-            _maxRooms = maxRooms;
+            this.maxRooms = maxRooms;
             SubscriptionId = subscriptionId;
             Id = id ?? Guid.NewGuid();
         }
@@ -27,7 +27,7 @@ namespace DanceStudio.Domain.Studios
         {
             _roomIds.Throw().IfContains(room.Id);
 
-            if (_roomIds.Count >= _maxRooms)
+            if (_roomIds.Count >= maxRooms)
             {
                 return StudioErrors.CannotHaveMoreRoomsThanTheSubscriptionAllows;
             }

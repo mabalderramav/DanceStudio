@@ -15,8 +15,8 @@ namespace DanceStudio.Infrastructure.Studios.Persistence
             builder.Property(x => x.Id)
                 .ValueGeneratedNever();
 
-            //builder.Property("maxRooms")
-            //    .HasColumnName("MaxRooms");
+            builder.Property("maxRooms")
+                .HasColumnName("MaxRooms");
 
             builder.Property<List<Guid>>("roomIds")
                 .HasColumnName("RoomIds")
