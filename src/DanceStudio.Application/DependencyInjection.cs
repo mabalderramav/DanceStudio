@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DanceStudio.Application.Studios.Commands.CreateStudio;
+using DanceStudio.Domain.Studios;
+using ErrorOr;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DanceStudio.Application
 {
@@ -11,6 +15,7 @@ namespace DanceStudio.Application
             services.AddMediatR(options =>
             {
                 options.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
+                options.AddBehavior<IPipelineBehavior<CreateStudioCommand, ErrorOr<Studio>>, CreateStudioCommandBehavior>();
             });
 
             return services;

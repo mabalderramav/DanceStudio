@@ -23,6 +23,14 @@ dotnet add .\src\DanceStudio.Domain\DanceStudio.Domain.csproj package Ardalis.Sm
 ### This package is used to throw exception
 dotnet add .\src\DanceStudio.Domain\DanceStudio.Domain.csproj package Throw
 
+### Package FluentValidation to project DanceStudio.Application
+### This package is used to validate the model
+dotnet add .\src\DanceStudio.Application\DanceStudio.Application.csproj package fluentvalidation
+
+### Package FluentValidation.AspNetCore to project DanceStudio.Application
+### This package is used to validate the model in the controller
+dotnet add .\src\DanceStudio.Application\DanceStudio.Application.csproj package fluentvalidation.aspnetcore
+
 # Install the dotnet-ef tool globally: Run the following command to install the dotnet-ef tool globally:
 dotnet tool install --global dotnet-ef
 
