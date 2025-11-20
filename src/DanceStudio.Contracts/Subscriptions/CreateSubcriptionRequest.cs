@@ -1,4 +1,4 @@
-﻿namespace DanceStudio.Contracts.Subcriptions
+﻿namespace DanceStudio.Contracts.Subscriptions
 {
     public record CreateSubscriptionRequest(
         SubscriptionType SubscriptionType,

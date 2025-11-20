@@ -5,26 +5,17 @@ using MediatR;
 
 namespace DanceStudio.Application.Subscriptions.Commands.CreateSubscription
 {
-    public class CreateSubscriptionCommandHandler :
-        IRequestHandler<CreateSubscriptionCommand, ErrorOr<Subscription>>
+    public class CreateSubscriptionCommandHandler(
+        ISubscriptionsRepository subscriptionsRepository,
+        IUnitOfWork unitOfWork,
+        IAdminsRepository adminsRepository)
+        :
+            IRequestHandler<CreateSubscriptionCommand, ErrorOr<Subscription>>
     {
-        private readonly ISubscriptionsRepository subscriptionsRepository;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IAdminsRepository adminsRepository;
-
-        public CreateSubscriptionCommandHandler(
-            ISubscriptionsRepository subscriptionsRepository,
-            IUnitOfWork unitOfWork,
-            IAdminsRepository adminsRepository)
-        {
-            this.subscriptionsRepository = subscriptionsRepository;
-            this.unitOfWork = unitOfWork;
-            this.adminsRepository = adminsRepository;
-        }
         public async Task<ErrorOr<Subscription>> Handle(CreateSubscriptionCommand request,
             CancellationToken cancellationToken)
         {
-            //validations and application bussiness rules
+            //validations and application business rules
             var admin = await adminsRepository.GetByIdAsync(request.AdminId);
 
             if (admin is null)
