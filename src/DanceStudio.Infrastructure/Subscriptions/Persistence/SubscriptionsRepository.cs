@@ -3,17 +3,10 @@ using DanceStudio.Domain.Subscriptions;
 using DanceStudio.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace DanceStudio.Infrastructure.Subcriptions.Persistence
+namespace DanceStudio.Infrastructure.Subscriptions.Persistence
 {
-    public class SubcriptionsRepository : ISubscriptionsRepository
+    public class SubscriptionsRepository(ApplicationDbContext context) : ISubscriptionsRepository
     {
-        private readonly ApplicationDbContext context;
-
-        public SubcriptionsRepository(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
-
         public async Task AddSubscriptionAsync(Subscription subscription)
         {
             await context.Set<Subscription>().AddAsync(subscription);
