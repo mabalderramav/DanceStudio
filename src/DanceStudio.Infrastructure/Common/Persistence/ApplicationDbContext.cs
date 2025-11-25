@@ -7,12 +7,8 @@ using System.Reflection;
 
 namespace DanceStudio.Infrastructure.Common.Persistence
 {
-    public class ApplicationDbContext : DbContext, IUnitOfWork
+    public class ApplicationDbContext(DbContextOptions options) : DbContext(options), IUnitOfWork
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Studio> Studios { get; set; }
