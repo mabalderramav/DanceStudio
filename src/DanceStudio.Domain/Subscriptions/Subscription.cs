@@ -7,14 +7,14 @@ namespace DanceStudio.Domain.Subscriptions
     public class Subscription
     {
         public Guid Id { get; private set; }
-        public SubscriptionType SubscriptionType { get; private set; } = default!;
+        public SubscriptionType SubscriptionType { get; private set; }
         public Guid AdminId { get; }
-        private readonly List<Guid> StudioIds = new();
-        private readonly int MaxStudios;
+        private readonly List<Guid> _studioIds = [];
+        private readonly int _maxStudios;
 
-        private Subscription()
+        public Subscription()
         {
-
+            SubscriptionType = null!;
         }
 
         public Subscription(SubscriptionType subscriptionType, Guid adminId, Guid? id = null)
@@ -22,19 +22,19 @@ namespace DanceStudio.Domain.Subscriptions
             SubscriptionType = subscriptionType;
             AdminId = adminId;
             Id = id ?? Guid.NewGuid();
-            MaxStudios = GetMaxStudios();
+            _maxStudios = GetMaxStudios();
         }
 
         #region businessLogic
         public ErrorOr<Success> AddStudio(Studio studio)
         {
-            StudioIds.Throw().IfContains(studio.Id);
+            _studioIds.Throw().IfContains(studio.Id);
 
-            if (StudioIds.Count >= MaxStudios)
+            if (_studioIds.Count >= _maxStudios)
             {
                 return SubscriptionErrors.CannotHaveMoreStudiosThanTheSubscriptionAllows;
             }
-            StudioIds.Add(studio.Id);
+            _studioIds.Add(studio.Id);
             return Result.Success;
         }
 
@@ -56,13 +56,13 @@ namespace DanceStudio.Domain.Subscriptions
 
         public bool HasStudio(Guid studioId)
         {
-            return StudioIds.Contains(studioId);
+            return _studioIds.Contains(studioId);
         }
 
         public void RemoveStudio(Guid studioId)
         {
-            StudioIds.Throw().IfNotContains(studioId);
-            StudioIds.Remove(studioId);
+            _studioIds.Throw().IfNotContains(studioId);
+            _studioIds.Remove(studioId);
         }
 
         #endregion

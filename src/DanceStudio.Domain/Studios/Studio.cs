@@ -4,24 +4,14 @@ using Throw;
 
 namespace DanceStudio.Domain.Studios
 {
-    public class Studio
+    public class Studio(string name, int maxRooms, Guid subscriptionId, Guid? id = null)
     {
-        private readonly int maxRooms;
+        public Guid Id { get; } = id ?? Guid.NewGuid();
+        private readonly List<Guid> _roomIds = [];
+        private readonly List<Guid> _trainerIds = [];
 
-        public Guid Id { get; }
-        private readonly List<Guid> _roomIds = new();
-        private readonly List<Guid> _trainerIds = new();
-
-        public string Name { get; init; } = null!;
-        public Guid SubscriptionId { get; init; }
-
-        public Studio(string name, int maxRooms, Guid subscriptionId, Guid? id = null)
-        {
-            Name = name;
-            this.maxRooms = maxRooms;
-            SubscriptionId = subscriptionId;
-            Id = id ?? Guid.NewGuid();
-        }
+        public string Name { get; init; } = name;
+        public Guid SubscriptionId { get; init; } = subscriptionId;
 
         public ErrorOr<Success> AddRoom(Room room)
         {
@@ -62,7 +52,5 @@ namespace DanceStudio.Domain.Studios
         {
             _roomIds.Remove(roomId);
         }
-
-        private Studio() { }
     }
 }
