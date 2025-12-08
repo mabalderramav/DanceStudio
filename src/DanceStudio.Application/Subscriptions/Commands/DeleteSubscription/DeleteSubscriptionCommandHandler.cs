@@ -4,24 +4,13 @@ using MediatR;
 
 namespace DanceStudio.Application.Subscriptions.Commands.DeleteSubscription
 {
-    public class DeleteSubscriptionCommandHandler : IRequestHandler<DeleteSubscriptionCommand, ErrorOr<Deleted>>
+    public class DeleteSubscriptionCommandHandler(
+        IAdminsRepository adminsRepository,
+        ISubscriptionsRepository subscriptionsRepository,
+        IUnitOfWork unitOfWork,
+        IStudiosRepository studiosRepository)
+        : IRequestHandler<DeleteSubscriptionCommand, ErrorOr<Deleted>>
     {
-        private readonly IAdminsRepository adminsRepository;
-        private readonly ISubscriptionsRepository subscriptionsRepository;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IStudiosRepository studiosRepository;
-
-        public DeleteSubscriptionCommandHandler(
-            IAdminsRepository adminsRepository,
-            ISubscriptionsRepository subscriptionsRepository,
-            IUnitOfWork unitOfWork,
-            IStudiosRepository studiosRepository)
-        {
-            this.adminsRepository = adminsRepository;
-            this.subscriptionsRepository = subscriptionsRepository;
-            this.unitOfWork = unitOfWork;
-            this.studiosRepository = studiosRepository;
-        }
         public async Task<ErrorOr<Deleted>> Handle(DeleteSubscriptionCommand request, CancellationToken cancellationToken)
         {
             var subscription = await subscriptionsRepository.GetByIdAsync(request.SubscriptionId);
