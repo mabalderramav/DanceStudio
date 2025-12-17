@@ -16,8 +16,8 @@ namespace DanceStudio.Infrastructure.Subscriptions.Persistence
                 subscriptionType => subscriptionType.Value,
                 value => SubscriptionType.FromValue(value)
                 );
-            builder.Property<List<Guid>>("StudioIds").HasColumnName("StudioIds").HasListOfIdsConverter();
-            builder.Property("MaxStudios").HasColumnName("MaxStudios");
+            builder.Property<List<Guid>>("_studioIds").HasColumnName("StudioIds").HasListOfIdsConverter();
+            builder.Property("_maxStudios").HasColumnName("MaxStudios");
 
         }
     }
