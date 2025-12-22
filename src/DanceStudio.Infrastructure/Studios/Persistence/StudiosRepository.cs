@@ -5,15 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DanceStudio.Infrastructure.Studios.Persistence
 {
-    public class StudiosRepository : IStudiosRepository
+    public class StudiosRepository(ApplicationDbContext context) : IStudiosRepository
     {
-        private readonly ApplicationDbContext context;
-
-        public StudiosRepository(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
-
         public async Task AddAsync(Studio studio)
         {
             await context.Studios.AddAsync(studio);
