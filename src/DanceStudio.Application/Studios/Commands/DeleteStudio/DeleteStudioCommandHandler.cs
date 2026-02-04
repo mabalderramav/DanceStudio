@@ -9,10 +9,6 @@ namespace DanceStudio.Application.Studios.Commands.DeleteStudio
         IStudiosRepository studiosRepository,
         IUnitOfWork unitOfWork) : IRequestHandler<DeleteStudioCommand, ErrorOr<Deleted>>
     {
-        private readonly ISubscriptionsRepository subscriptionsRepository = subscriptionsRepository;
-        private readonly IStudiosRepository studiosRepository = studiosRepository;
-        private readonly IUnitOfWork unitOfWork = unitOfWork;
-
         public async Task<ErrorOr<Deleted>> Handle(DeleteStudioCommand request, CancellationToken cancellationToken)
         {
             var studio = await studiosRepository.GetByIdAsync(request.StudioId);

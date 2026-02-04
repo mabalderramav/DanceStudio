@@ -15,9 +15,6 @@ namespace DanceStudio.Application.Subscriptions.Commands.DeleteSubscription
         {
             var subscription = await subscriptionsRepository.GetByIdAsync(request.SubscriptionId);
 
-            if (subscription is null)
-                return Error.NotFound("Subscription not found");
-
             var admin = await adminsRepository.GetByIdAsync(subscription.AdminId);
 
             if (admin is null) return Error.Unexpected("Admin not found");

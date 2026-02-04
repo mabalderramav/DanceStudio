@@ -10,15 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace DanceStudio.Api.Controllers
 {
     [Route("subscriptions/{subscriptionId:guid}/studios")]
-    public class StudiosController : ApiController
+    public class StudiosController(ISender mediator) : ApiController
     {
-        private readonly ISender mediator;
-
-        public StudiosController(ISender mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(
         CreateStudioRequest request,
@@ -76,7 +69,7 @@ namespace DanceStudio.Api.Controllers
             var addTrainerResult = await mediator.Send(command);
 
             return addTrainerResult.Match(
-                success => Ok(),
+                _ => Ok(),
                 Problem);
         }
     }

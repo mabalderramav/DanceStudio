@@ -9,15 +9,12 @@ namespace DanceStudio.Application.Studios.Queries.GetStudio
         IStudiosRepository studiosRepository,
         ISubscriptionsRepository subscriptionsRepository) : IRequestHandler<GetStudioQuery, ErrorOr<Studio>>
     {
-        private readonly IStudiosRepository studiosRepository = studiosRepository;
-        private readonly ISubscriptionsRepository subscriptionsRepository = subscriptionsRepository;
-
         public async Task<ErrorOr<Studio>> Handle(GetStudioQuery request, CancellationToken cancellationToken)
         {
             if (!await subscriptionsRepository.ExistsAsync(request.SubscriptionId))
                 return Error.NotFound("Subscription not found");
             
-            if (await studiosRepository.GetByIdAsync(request.StudioId) is not Studio studio)
+            if (await studiosRepository.GetByIdAsync(request.StudioId) is not { } studio)
                 return Error.NotFound(description: "Studio not found");
 
             return studio;

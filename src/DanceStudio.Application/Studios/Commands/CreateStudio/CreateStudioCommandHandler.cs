@@ -10,10 +10,6 @@ namespace DanceStudio.Application.Studios.Commands.CreateStudio
         IStudiosRepository studiosRepository,
         IUnitOfWork unitOfWork) : IRequestHandler<CreateStudioCommand, ErrorOr<Studio>>
     {
-        private readonly ISubscriptionsRepository subscriptionsRepository = subscriptionsRepository;
-        private readonly IStudiosRepository studiosRepository = studiosRepository;
-        private readonly IUnitOfWork unitOfWork = unitOfWork;
-
         public async Task<ErrorOr<Studio>> Handle(CreateStudioCommand request, CancellationToken cancellationToken)
         {
             var subscription = await subscriptionsRepository.GetByIdAsync(request.SubscriptionId);
