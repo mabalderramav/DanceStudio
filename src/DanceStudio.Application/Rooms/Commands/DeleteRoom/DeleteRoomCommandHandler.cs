@@ -4,22 +4,13 @@ using MediatR;
 
 namespace DanceStudio.Application.Rooms.Commands.DeleteRoom
 {
-    public class DeleteRoomCommandHandler : IRequestHandler<DeleteRoomCommand, ErrorOr<Deleted>>
+    public class DeleteRoomCommandHandler(
+        IStudiosRepository studiosRepository,
+        ISubscriptionsRepository subscriptionsRepository,
+        IUnitOfWork unitOfWork)
+        : IRequestHandler<DeleteRoomCommand, ErrorOr<Deleted>>
     {
-        private readonly IStudiosRepository studiosRepository;
-        private readonly ISubscriptionsRepository subscriptionsRepository;
-        private readonly IUnitOfWork unitOfWork;
-
-        public DeleteRoomCommandHandler(
-            IStudiosRepository studiosRepository,
-            ISubscriptionsRepository subscriptionsRepository,
-            IUnitOfWork unitOfWork
-        )
-        {
-            this.studiosRepository = studiosRepository;
-            this.subscriptionsRepository = subscriptionsRepository;
-            this.unitOfWork = unitOfWork;
-        }
+        private readonly ISubscriptionsRepository _subscriptionsRepository = subscriptionsRepository;
 
         public async Task<ErrorOr<Deleted>> Handle(DeleteRoomCommand request, CancellationToken cancellationToken)
         {
