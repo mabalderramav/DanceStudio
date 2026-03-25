@@ -11,14 +11,14 @@ namespace DanceStudio.Application.Studios.Commands.CreateStudio
             RequestHandlerDelegate<ErrorOr<Studio>> next,
             CancellationToken cancellationToken)
         {
-            // Validating...
             var validator = new CreateStudioCommandValidator();
-            var validationResult = await validator.ValidateAsync(request);
+            var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
             if (!validationResult.IsValid)
             {
                 return validationResult.Errors
-                    .Select(x => Error.Validation(code: x.PropertyName, description: x.ErrorMessage))
+                    .Select(x =>
+                        Error.Validation(code: x.PropertyName, description: x.ErrorMessage))
                     .ToList();
             }
 

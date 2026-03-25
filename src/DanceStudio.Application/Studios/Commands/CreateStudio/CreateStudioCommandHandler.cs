@@ -14,9 +14,6 @@ namespace DanceStudio.Application.Studios.Commands.CreateStudio
         {
             var subscription = await subscriptionsRepository.GetByIdAsync(request.SubscriptionId);
 
-            if (subscription is null)
-                return Error.NotFound(description: "Subscription not found");
-
             var studio = new Studio(
                 name: request.Name,
                 maxRooms: subscription.GetMaxRooms(),

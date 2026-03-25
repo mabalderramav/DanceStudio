@@ -15,7 +15,8 @@ namespace DanceStudio.Application
             services.AddMediatR(options =>
             {
                 options.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
-                options.AddBehavior<IPipelineBehavior<CreateStudioCommand, ErrorOr<Studio>>, CreateStudioCommandBehavior>();
+                options.AddBehavior<IPipelineBehavior<CreateStudioCommand, ErrorOr<Studio>>, 
+                    CreateStudioCommandBehavior>();
             });
 
             return services;
