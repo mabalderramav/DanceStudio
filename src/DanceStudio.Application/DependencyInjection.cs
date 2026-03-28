@@ -1,7 +1,5 @@
-﻿using DanceStudio.Application.Studios.Commands.CreateStudio;
-using DanceStudio.Domain.Studios;
-using ErrorOr;
-using MediatR;
+﻿using DanceStudio.Application.Common.Behavior;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DanceStudio.Application
@@ -10,15 +8,13 @@ namespace DanceStudio.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            // services.AddScoped<ISubscriptionWriteService, SubscriptionWriteService>();
-
             services.AddMediatR(options =>
             {
                 options.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
-                options.AddBehavior<IPipelineBehavior<CreateStudioCommand, ErrorOr<Studio>>, 
-                    CreateStudioCommandBehavior>();
+                options.AddOpenBehavior(typeof(ValidationBehavior<,>));
             });
 
+            services.AddValidatorsFromAssemblyContaining(typeof(DependencyInjection));
             return services;
         }
     }

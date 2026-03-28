@@ -1,24 +1,14 @@
-﻿using DanceStudio.Domain.Subscriptions;
+﻿using DanceStudio.Domain.Admins.Events;
+using DanceStudio.Domain.Common;
+using DanceStudio.Domain.Subscriptions;
 using Throw;
 
 namespace DanceStudio.Domain.Admins
 {
-    public class Admin
+    public class Admin(Guid userId, Guid? subscriptionId = null, Guid? id = null) : Entity
     {
-        public Guid Id { get; private set; }
-        public Guid UserId { get; }
-        public Guid? SubscriptionId { get; private set; } = null;
-
-        public Admin(Guid userId, Guid? subscriptionId = null, Guid? id = null)
-        {
-            UserId = userId;
-            SubscriptionId = subscriptionId;
-            Id = id ?? Guid.NewGuid();
-        }
-
-        private Admin()
-        {
-        }
+        public Guid UserId { get; } = userId;
+        public Guid? SubscriptionId { get; private set; } = subscriptionId;
 
         public void SetSubscription(Subscription subscription)
         {
@@ -30,6 +20,7 @@ namespace DanceStudio.Domain.Admins
         {
             SubscriptionId.ThrowIfNull().IfNotEquals(subscriptionId);
             SubscriptionId = null;
+            DomainEvents.Add(new SubscriptionDeletedEvent(subscriptionId));
         }
     }
 }
