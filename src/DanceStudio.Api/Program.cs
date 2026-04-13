@@ -12,10 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddProblemDetails();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
 app.UseExceptionHandler();
+app.AddInfrastructureMiddleware();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

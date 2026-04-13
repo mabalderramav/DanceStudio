@@ -7,11 +7,11 @@ namespace DanceStudio.Application.Subscriptions.Commands.DeleteSubscription
     public class DeleteSubscriptionCommandHandler(
         IAdminsRepository adminsRepository,
         ISubscriptionsRepository subscriptionsRepository,
-        IUnitOfWork unitOfWork,
-        IStudiosRepository studiosRepository)
+        IUnitOfWork unitOfWork)
         : IRequestHandler<DeleteSubscriptionCommand, ErrorOr<Deleted>>
     {
-        public async Task<ErrorOr<Deleted>> Handle(DeleteSubscriptionCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Deleted>> Handle(DeleteSubscriptionCommand request,
+            CancellationToken cancellationToken)
         {
             var subscription = await subscriptionsRepository.GetByIdAsync(request.SubscriptionId);
 
@@ -20,12 +20,7 @@ namespace DanceStudio.Application.Subscriptions.Commands.DeleteSubscription
             if (admin is null) return Error.Unexpected("Admin not found");
 
             admin.DeleteSubscription(request.SubscriptionId);
-
-            var studiosToDelete = await studiosRepository.ListBySubscriptionIdAsync(request.SubscriptionId);
-
             await adminsRepository.UpdateAsync(admin);
-            await subscriptionsRepository.RemoveSubscriptionAsync(subscription);
-            await studiosRepository.RemoveRangeAsync(studiosToDelete);
             await unitOfWork.CommitChangesAsync();
             return Result.Deleted;
         }
