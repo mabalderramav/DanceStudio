@@ -44,7 +44,10 @@ dotnet ef migrations add Initial --project .\src\DanceStudio.Infrastructure\Danc
 dotnet ef migrations remove --project .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj --startup-project .\src\DanceStudio.Api\DanceStudio.Api.csproj
 
 ### Update database
+##### Windows
 dotnet ef database update --project .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj --startup-project .\src\DanceStudio.Api\DanceStudio.Api.csproj
+##### Linux
+dotnet ef database update --project ./src/DanceStudio.Infrastructure/DanceStudio.Infrastructure.csproj --startup-project ./src/DanceStudio.Api/DanceStudio.Api.csproj
 
 ### Package Manager Console
 add-migration maxstudios

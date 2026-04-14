@@ -5,10 +5,19 @@ using Throw;
 
 namespace DanceStudio.Domain.Admins
 {
-    public class Admin(Guid userId, Guid? subscriptionId = null, Guid? id = null) : Entity
+    public class Admin : Entity
     {
-        public Guid UserId { get; } = userId;
-        public Guid? SubscriptionId { get; private set; } = subscriptionId;
+        public Guid UserId { get; private set; }
+        public Guid? SubscriptionId { get; private set; }
+
+        private Admin() { } // For EF Core
+
+        public Admin(Guid userId, Guid? subscriptionId = null, Guid? id = null)
+            : base(id ?? Guid.NewGuid())
+        {
+            UserId = userId;
+            SubscriptionId = subscriptionId;
+        }
 
         public void SetSubscription(Subscription subscription)
         {
