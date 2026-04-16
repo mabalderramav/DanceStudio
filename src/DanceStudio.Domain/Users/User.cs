@@ -97,7 +97,6 @@ namespace DanceStudio.Domain.Users
 
             return profileTypes;
         }
-
         private User() { }
     }
 }

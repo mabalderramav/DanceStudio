@@ -7,14 +7,16 @@ namespace DanceStudio.Infrastructure.Admins.Persistence
 {
     public class AdminsRepository(ApplicationDbContext context) : IAdminsRepository
     {
-        public Task AddAdminAsync(Admin admin)
+        public async Task AddAdminAsync(Admin admin)
         {
-            throw new NotImplementedException();
+            await context.Admins.AddAsync(admin);
         }
 
         public async Task<Admin?> GetByIdAsync(Guid adminId)
         {
-            return await context.Admins.FirstOrDefaultAsync(x => x.Id == adminId);
+            return await context.Admins
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == adminId);
         }
 
         public Task UpdateAsync(Admin admin)

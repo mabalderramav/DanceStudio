@@ -9,7 +9,7 @@ using DomainSubscriptionType = DanceStudio.Domain.Subscriptions.SubscriptionType
 namespace DanceStudio.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("subscriptions")]
     public class SubscriptionsController(ISender mediator) : ApiController
     {
         [HttpPost]

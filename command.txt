@@ -32,6 +32,34 @@ dotnet add .\src\DanceStudio.Application\DanceStudio.Application.csproj package 
 ### This package is used to validate the model in the controller
 dotnet add .\src\DanceStudio.Application\DanceStudio.Application.csproj package fluentvalidation.aspnetcore
 
+### Package Microsoft.AspNetCore.Authentication to project DanceStudio.Infrastructure
+### This package is used to authenticate the user
+dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package microsoft.aspnetcore.authentication --version 2.2.0
+
+### Package Microsoft.AspNetCore.Authentication.JwtBearer to project DanceStudio.Infrastructure
+### This package is used to authenticate the user with JWT
+dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package microsoft.aspnetcore.authentication.jwtbearer --version 8.0.11
+
+### Package Microsoft.Extensions.Identity.Core to project DanceStudio.Infrastructure
+### This package is used to authenticate the user with JWT
+dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package microsoft.extensions.identity.core --version 9.0.0
+
+### Package Microsoft.Extensions.Configuration.Binder to project DanceStudio.Infrastructure
+### This package is used to bind the configuration to the model
+dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package microsoft.extensions.configuration.binder --version 9.0.0
+
+### Package bcrypt.net-next to project DanceStudio.Infrastructure
+### This package is used to hash the password
+dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package bcrypt.net-next --version 4.0.3
+
+### Package System.IdentityModel.Tokens.Jwt to project DanceStudio.Infrastructure
+### This package is used to generate the JWT token
+dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package system.identitymodel.tokens.jwt --version 8.3.0
+
+### List packages in project DanceStudio.Infrastructure
+dotnet list .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package
+dotnet list .\src\DanceStudio.Api\DanceStudio.Api.csproj package
+
 # Install the dotnet-ef tool globally: Run the following command to install the dotnet-ef tool globally:
 dotnet tool install --global dotnet-ef
 
