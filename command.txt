@@ -6,6 +6,7 @@ dotnet build
 ### Run project
 dotnet run --project src/MyProject/MyProject.csproj
 dotnet run --project src/DanceStudio.Api/DanceStudio.Api.csproj
+dotnet run --project ./src/DanceStudio.Api/DanceStudio.Api.csproj
 
 # Add package
 ### Package ErrorOr to project DanceStudio.Domain
