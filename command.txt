@@ -57,6 +57,14 @@ dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj pa
 ### This package is used to generate the JWT token
 dotnet add .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package system.identitymodel.tokens.jwt --version 8.3.0
 
+### Package FluentAssertions to project DanceStudio.DomainUnitTest
+### This package is used to assert the model
+dotnet add .\tests\DanceStudio.DomainUnitTest\ package FluentAssertions --version 7.0.0
+
+### Package NSubstitute to project DanceStudio.ApplicationUnitTests
+### This package is used to mock the dependencies
+dotnet add .\tests\DanceStudio.ApplicationUnitTests\ package NSubstitute --version 5.3.0 
+
 ### List packages in project DanceStudio.Infrastructure
 dotnet list .\src\DanceStudio.Infrastructure\DanceStudio.Infrastructure.csproj package
 dotnet list .\src\DanceStudio.Api\DanceStudio.Api.csproj package

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DanceStudio.Application\DanceStudio.Application.csproj" />
+    <ProjectReference Include="..\..\src\DanceStudio.Contracts\DanceStudio.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\DanceStudio.Domain\DanceStudio.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
