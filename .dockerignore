@@ -1,0 +1,15 @@
+.git
+.gitignore
+.idea
+.vs
+.vscode
+
+**/bin
+**/obj
+
+src/**/appsettings.Development.json
+
+tests
+README.md
+command.txt
+

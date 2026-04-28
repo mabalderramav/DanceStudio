@@ -95,3 +95,33 @@ update-database
 update-database 0
 update-database Initial
 ####
+
+# Docker
+
+### Build Docker image (Linux/macOS shell)
+docker build -t dancestudio-api:latest .
+
+### Run Docker container (Linux)
+docker run --rm -p 8080:8080 \
+  --add-host host.docker.internal:host-gateway \
+  -e ConnectionStrings__DefaultConnection="server=host.docker.internal;initial catalog=DanceStudioDb;User Id=sa;Password=Aldo1235;trust server certificate=true" \
+  -e JwtSettings__Audience="DanceStudio" \
+  -e JwtSettings__Issuer="DanceStudio" \
+  -e JwtSettings__Secret="UOAISDFUOIFDOSIAJUFIODMIGFDSJIOJOISDJOQIWPRE97867868756121209D9DFDS0MNB0HKG56YFWYTRQ524YTG7DPI90U" \
+  -e JwtSettings__TokenExpirationInMinutes=60 \
+  dancestudio-api:latest
+
+### Docker Compose (API + SQL Server)
+cp .env.example .env
+docker compose config
+docker compose up --build -d
+
+### Check services
+docker compose ps
+docker compose logs -f api
+
+### Stop services
+docker compose down
+
+### Stop services and remove database volume
+docker compose down -v
