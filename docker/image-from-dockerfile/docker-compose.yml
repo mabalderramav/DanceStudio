@@ -1,6 +1,9 @@
 services:
   api:
-    image: mabalderramav/dance_studio_api_image:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dancestudio-api:latest
     container_name: dancestudio-api
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
