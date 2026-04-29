@@ -125,3 +125,14 @@ docker compose down
 
 ### Stop services and remove database volume
 docker compose down -v
+
+# Docker Hub
+### Tag and push image to Docker Hub
+docker login
+docker image ls | grep dancestudio-api
+docker tag dancestudio-api:latest mabalderramav/dance_studio_api_image:latest
+docker push mabalderramav/dance_studio_api_image:latest
+
+### Tag and push image with version
+docker tag dancestudio-api:latest YOUR_DOCKERHUB_USERNAME/dancestudio-api:v1.0.0
+docker push YOUR_DOCKERHUB_USERNAME/dancestudio-api:v1.0.0
