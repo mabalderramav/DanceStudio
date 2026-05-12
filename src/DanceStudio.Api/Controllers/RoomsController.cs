@@ -2,11 +2,13 @@
 using DanceStudio.Application.Rooms.Commands.DeleteRoom;
 using DanceStudio.Contracts.Rooms;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DanceStudio.Api.Controllers
 {
-    [Route("api/{studioId:guid}/rooms")]
+    [Route("studios/{studioId:guid}/rooms")]
+    [Authorize]
     public class RoomsController : ApiController
     {
         private readonly ISender sender;

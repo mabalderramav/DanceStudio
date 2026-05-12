@@ -3,6 +3,7 @@ using DanceStudio.Application.Subscriptions.Commands.DeleteSubscription;
 using DanceStudio.Application.Subscriptions.Queries.GetSubscription;
 using DanceStudio.Contracts.Subscriptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DomainSubscriptionType = DanceStudio.Domain.Subscriptions.SubscriptionType;
 
@@ -10,6 +11,7 @@ namespace DanceStudio.Api.Controllers
 {
     [ApiController]
     [Route("subscriptions")]
+    [Authorize]
     public class SubscriptionsController(ISender mediator) : ApiController
     {
         [HttpPost]

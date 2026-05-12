@@ -5,11 +5,13 @@ using DanceStudio.Application.Studios.Queries.GetStudio;
 using DanceStudio.Application.Studios.Queries.ListStudios;
 using DanceStudio.Contracts.Studios;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DanceStudio.Api.Controllers
 {
     [Route("subscriptions/{subscriptionId:guid}/studios")]
+    [Authorize]
     public class StudiosController(ISender mediator) : ApiController
     {
         [HttpPost]

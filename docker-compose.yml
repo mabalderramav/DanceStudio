@@ -1,11 +1,14 @@
 services:
   api:
-    image: mabalderramav/dance_studio_api_image:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dancestudio-api:latest
     container_name: dancestudio-api
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
       ASPNETCORE_URLS: http://+:8080
-      ConnectionStrings__DefaultConnection: server=host.docker.internal;initial catalog=${DB_NAME:-DanceStudioDb};User Id=sa;Password=${MSSQL_SA_PASSWORD:-YourStrong!Passw0rd};trust server certificate=true
+      ConnectionStrings__DefaultConnection: server=sqlserver2025;initial catalog=${DB_NAME:-DanceStudioDb};User Id=sa;Password=${MSSQL_SA_PASSWORD:-YourStrong!Passw0rd};trust server certificate=true
       JwtSettings__Audience: ${JWT_AUDIENCE:-DanceStudio}
       JwtSettings__Issuer: ${JWT_ISSUER:-DanceStudio}
       JwtSettings__Secret: ${JWT_SECRET:-ReplaceWithALongRandomSecretAtLeast64CharsLongForJwtSigning1234567890}
@@ -18,4 +21,3 @@ services:
 networks:
   miasoftnanus-network:
     external: true
-
